@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { Button, Modal, Icon, Form } from "semantic-ui-react";
+import { Button, Modal, Icon, Form, Message } from "semantic-ui-react";
 
 import { useMutation } from "react-query";
 import { queryClient } from "../../pages/_app";
 
 // services
-import { generateCustomer, addCustomer } from "../../services/services";
+import { generateCustomer, addCustomer, delay } from "../../services/services";
 
 const AddNewCustomer = () => {
   const [open, setOpen] = React.useState(false);
@@ -17,12 +17,15 @@ const AddNewCustomer = () => {
     city: "",
     country: "",
   });
-  const mutation = useMutation(() => addCustomer(customer), {
-    onSuccess: () => {
-      // Invalidate and refetch
-      //queryClient.invalidateQueries("getAllCustomers");
-    },
-  });
+  const { mutate, isLoading, isError, isSuccess, reset } = useMutation(
+    () => addCustomer(customer),
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        //queryClient.invalidateQueries("getAllCustomers");
+      },
+    }
+  );
 
   return (
     <Modal
@@ -37,6 +40,7 @@ const AddNewCustomer = () => {
           country: "",
           id: "",
         });
+        reset();
       }}
       onOpen={() => setOpen(true)}
       size="tiny"
@@ -79,6 +83,21 @@ const AddNewCustomer = () => {
         </Button>
       </Modal.Header>
       <Modal.Content>
+        {isSuccess && (
+          <Message color="green" className="text-center">
+            <h2>Customer Added Successfully!!!</h2>
+          </Message>
+        )}
+        {isLoading && (
+          <Message color="orange" className="text-center">
+            <h2 className="animate-pulse">Adding Customer...</h2>
+          </Message>
+        )}
+        {isError && (
+          <Message color="red" className="text-center">
+            <h2>Unable to add customer. Please try again later.</h2>
+          </Message>
+        )}
         <Form>
           <Form.Field>
             <label>Name</label>
@@ -107,7 +126,12 @@ const AddNewCustomer = () => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => mutation.mutate()} positive>
+        <Button
+          onClick={async () => {
+            mutate();
+          }}
+          positive
+        >
           Add
         </Button>
       </Modal.Actions>

@@ -18,12 +18,15 @@ const EditCustomer = ({ user }) => {
     country: user.country || "",
     id: user.id || "",
   });
-  const mutation = useMutation(() => editCustomer(customer), {
-    onSuccess: () => {
-      // Invalidate and refetch
-      //queryClient.invalidateQueries("getAllCustomers");
-    },
-  });
+  const { mutate, isLoading, isError, isSuccess, reset } = useMutation(
+    () => editCustomer(customer),
+    {
+      onSuccess: () => {
+        // Invalidate and refetch
+        //queryClient.invalidateQueries("getAllCustomers");
+      },
+    }
+  );
 
   const handleChange = (value, property) => {
     setCustomer({
@@ -45,6 +48,7 @@ const EditCustomer = ({ user }) => {
           country: "",
           id: "",
         });
+        reset();
       }}
       onOpen={() => setOpen(true)}
       size="tiny"
@@ -60,6 +64,21 @@ const EditCustomer = ({ user }) => {
         <p className="m-0">Edit Customer</p>
       </Modal.Header>
       <Modal.Content>
+        {isSuccess && (
+          <Message color="green" className="text-center">
+            <h2>Customer Edited Successfully!!!</h2>
+          </Message>
+        )}
+        {isLoading && (
+          <Message color="orange" className="text-center">
+            <h2 className="animate-pulse">Editing Customer...</h2>
+          </Message>
+        )}
+        {isError && (
+          <Message color="red" className="text-center">
+            <h2>Unable to edit customer. Please try again later.</h2>
+          </Message>
+        )}
         <Form>
           <Form.Field>
             <label>Name</label>
@@ -112,7 +131,7 @@ const EditCustomer = ({ user }) => {
         </Form>
       </Modal.Content>
       <Modal.Actions>
-        <Button onClick={() => mutation.mutate()} positive>
+        <Button onClick={() => mutate()} positive>
           Done
         </Button>
       </Modal.Actions>

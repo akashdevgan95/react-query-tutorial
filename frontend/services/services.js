@@ -2,15 +2,25 @@ import axios from "axios";
 
 const baseURL = "http://localhost:1337/api";
 
+export const delay = (time = 1000) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, time);
+  });
+};
+
 export const generateCustomer = () => {
   return axios(`https://randomuser.me/api/`);
 };
 
-export const getCustomers = () => {
+export const getCustomers = async () => {
+  // await delay(5000);
   return axios(`${baseURL}/customers`);
 };
 
-export const addCustomer = (data) => {
+export const addCustomer = async (data) => {
+  await delay(3000);
   return axios({
     method: "post",
     url: `${baseURL}/customers`,
@@ -21,7 +31,8 @@ export const addCustomer = (data) => {
   });
 };
 
-export const editCustomer = (data) => {
+export const editCustomer = async (data) => {
+  // await delay(5000);
   return axios({
     method: "put",
     url: `${baseURL}/customers/${data.id}`,

@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Icon, Table, Button, Label } from "semantic-ui-react";
+import { Table, Label, Message } from "semantic-ui-react";
 
 //services
 import { getCustomers } from "../../services/services";
@@ -19,7 +19,19 @@ const CustomersTable = () => {
   const allCustomers = response?.data.data;
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <Message color="orange" className="text-center">
+        <h2 className="animate-pulse">Loading...</h2>
+      </Message>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Message color="red" className="text-center">
+        <h2>Unable to fetch data. Please try again later.</h2>
+      </Message>
+    );
   }
 
   return (
