@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { Table, Message, Button, Icon } from "semantic-ui-react";
 
 //services
-import { getCustomers } from "../../services/services";
+import { getCustomers } from "../../queries";
 
 //components
 import AddNewCustomer from "../modals/addNewCustomer";

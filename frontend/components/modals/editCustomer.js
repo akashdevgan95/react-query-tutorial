@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { queryClient } from "../../pages/_app";
 
 // services
-import { editCustomer } from "../../services/services";
+import { editCustomer } from "../../queries";
 
 const EditCustomer = ({ user }) => {
   const [open, setOpen] = React.useState(false);

@@ -5,7 +5,7 @@ import { useMutation } from "react-query";
 import { queryClient } from "../../pages/_app";
 
 // services
-import { generateCustomer, addCustomer, delay } from "../../services/services";
+import { generateCustomer, addCustomer, delay } from "../../queries";
 
 const AddNewCustomer = () => {
   const [open, setOpen] = React.useState(false);
