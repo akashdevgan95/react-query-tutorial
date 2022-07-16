@@ -24,8 +24,8 @@ const ProductsTable = () => {
 
   return (
     <div>
-      {products.map((product) => (
-        <p>{product.name}</p>
+      {products.map((product, i) => (
+        <p key={i}>{product.name}</p>
       ))}
     </div>
   );
