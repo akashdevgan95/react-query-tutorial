@@ -7,7 +7,7 @@ import { getCustomers } from "../services/services";
 //query client
 import { queryClient } from "./_app";
 
-const prefetch = () => {
+const Prefetch = () => {
   useEffect(() => {
     queryClient.prefetchQuery("getAllCustomers", getCustomers);
   }, []);
@@ -21,4 +21,4 @@ const prefetch = () => {
   );
 };
 
-export default prefetch;
+export default Prefetch;
