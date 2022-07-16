@@ -42,12 +42,3 @@ export const editCustomer = async (data) => {
     },
   });
 };
-
-export const deleteCustomer = async (id) => {
-  //await delay(5000);
-  return axios({
-    method: "delete",
-    url: `${baseURL}/customers/${id}`,
-    headers: {},
-  });
-};
