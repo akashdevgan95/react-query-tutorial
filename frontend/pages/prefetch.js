@@ -9,7 +9,9 @@ import { queryClient } from "./_app";
 
 const Prefetch = () => {
   useEffect(() => {
-    queryClient.prefetchQuery("getAllCustomers", getCustomers);
+    queryClient.prefetchQuery("getAllCustomers", () => {
+      return axios("http://localhost:1337/api/customers");
+    });
   }, []);
   return (
     <>

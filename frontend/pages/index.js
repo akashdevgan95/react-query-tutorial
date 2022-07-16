@@ -1,19 +1,18 @@
 import React from "react";
 import Link from "next/link";
+import axios from "axios";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
-
-//services
-import { getCustomers } from "../queries";
 
 export default function Home() {
   const {
     data: response,
     isLoading,
     isError,
-  } = useQuery("getAllCustomers", getCustomers);
+  } = useQuery("getAllCustomers", () => {
+    return axios("http://localhost:1337/api/customers");
+  });
   const router = useRouter();
-
   const allCustomers = response?.data.data;
 
   if (isLoading) {

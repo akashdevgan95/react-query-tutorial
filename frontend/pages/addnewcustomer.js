@@ -1,9 +1,7 @@
 import React, { useState } from "react";
+import axios from "axios";
 import { useRouter } from "next/router";
 import { useMutation } from "react-query";
-
-//query
-import { addCustomer } from "../queries";
 
 const Addnewcustomer = () => {
   const router = useRouter();
@@ -11,9 +9,16 @@ const Addnewcustomer = () => {
     name: "",
     email: "",
   });
-  const { mutate, isLoading, isError } = useMutation(() =>
-    addCustomer(customer)
-  );
+  const { mutate, isLoading, isError } = useMutation(() => {
+    return axios({
+      method: "post",
+      url: "http://localhost:1337/api/customers",
+      headers: {},
+      data: {
+        data: customer,
+      },
+    });
+  });
 
   return (
     <div>
