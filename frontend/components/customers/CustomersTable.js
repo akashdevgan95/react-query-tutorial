@@ -1,6 +1,6 @@
 import React from "react";
 import { useQuery } from "react-query";
-import { Table, Label, Message } from "semantic-ui-react";
+import { Table, Message, Button, Icon } from "semantic-ui-react";
 
 //services
 import { getCustomers } from "../../services/services";
@@ -40,6 +40,7 @@ const CustomersTable = () => {
         <h1 className="m-0">List of Customers</h1>
         <AddNewCustomer />
       </div>
+
       <Table celled>
         <Table.Header>
           <Table.Row>
@@ -49,11 +50,11 @@ const CustomersTable = () => {
             <Table.HeaderCell>Phone</Table.HeaderCell>
             <Table.HeaderCell>City</Table.HeaderCell>
             <Table.HeaderCell>Country</Table.HeaderCell>
-            <Table.HeaderCell>Action</Table.HeaderCell>
+            <Table.HeaderCell>Edit</Table.HeaderCell>
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {allCustomers.map((customer) => {
+          {allCustomers?.map((customer) => {
             const { name, age, email, phone, city, country } =
               customer.attributes;
             return (
@@ -63,11 +64,7 @@ const CustomersTable = () => {
                 <Table.Cell>{age}</Table.Cell>
                 <Table.Cell>{phone}</Table.Cell>
                 <Table.Cell>{city}</Table.Cell>
-                <Table.Cell>
-                  <Label size="large" color="orange">
-                    {country}
-                  </Label>
-                </Table.Cell>
+                <Table.Cell>{country}</Table.Cell>
                 <Table.Cell>
                   <EditCustomer
                     user={{ ...customer.attributes, id: customer.id }}

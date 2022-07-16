@@ -20,7 +20,7 @@ export const getCustomers = async () => {
 };
 
 export const addCustomer = async (data) => {
-  await delay(3000);
+  //await delay(3000);
   return axios({
     method: "post",
     url: `${baseURL}/customers`,
@@ -40,5 +40,14 @@ export const editCustomer = async (data) => {
     data: {
       data,
     },
+  });
+};
+
+export const deleteCustomer = async (id) => {
+  //await delay(5000);
+  return axios({
+    method: "delete",
+    url: `${baseURL}/customers/${id}`,
+    headers: {},
   });
 };

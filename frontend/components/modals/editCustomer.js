@@ -54,7 +54,7 @@ const EditCustomer = ({ user }) => {
       size="tiny"
       open={open}
       trigger={
-        <Button icon labelPosition="left" primary>
+        <Button size="mini" icon labelPosition="left" primary>
           <Icon name="edit" />
           Edit
         </Button>
