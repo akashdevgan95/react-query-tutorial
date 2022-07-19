@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 
-//service
-import { getCustomers } from "../services/services";
-
 //query client
 import { queryClient } from "./_app";
 
