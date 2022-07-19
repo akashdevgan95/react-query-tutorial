@@ -17,18 +17,6 @@
     },
     "email": {
       "type": "email"
-    },
-    "age": {
-      "type": "integer"
-    },
-    "city": {
-      "type": "string"
-    },
-    "country": {
-      "type": "string"
-    },
-    "phone": {
-      "type": "biginteger"
     }
   }
 }
